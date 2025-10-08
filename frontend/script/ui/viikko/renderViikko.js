@@ -51,11 +51,11 @@ export function renderViikko(date) {
         if (window.kaikkiTapahtumat) {
             tapahtumat = window.kaikkiTapahtumat.filter(ev => ev.alku_pvm === paivattr);
 
-            // Calculate total length of names and descriptions
+            // Laske nimien ja kuvausten kokonaispituus
             const totalChars = tapahtumat.reduce((sum, ev) => sum + (ev.nimi?.length || 0) + (ev.kuvaus?.length || 0), 0);
 
             if (totalChars > 100) {
-                // Collapsed: show only time or generic label, hide name and description
+                // Kollapsoitu: näytä vain aika tai yleinen nimike, piilota nimi ja kuvaus
                 tapahtumatHtml = tapahtumat.map((ev, idx) => {
                     let importanceClass = "tapahtuma-ei-tarkea";
                     if (ev.tarkeys === 1) importanceClass = "tapahtuma-tarkea";
@@ -66,13 +66,13 @@ export function renderViikko(date) {
                     } else if (ev.alku_aika) {
                         timeStr = `<span class="event-time">${ev.alku_aika}</span> `;
                     }
-                    // Only show time, not name or description
+                    // Näyttää vain aika, ei nimeä tai kuvausta
                     return `<span class="viikko-event collapsed ${importanceClass}" data-idx="${idx}">
                         ${timeStr || 'Tapahtuma'}
                     </span>`;
                 }).join('');
             } else {
-                // Expanded: show names and descriptions
+                // Laajennettu: näyttää nimet ja kuvaukset
                 tapahtumatHtml = tapahtumat.map((ev, idx) => {
                     let importanceClass = "tapahtuma-ei-tarkea";
                     if (ev.tarkeys === 1) importanceClass = "tapahtuma-tarkea";
@@ -105,15 +105,15 @@ export function renderViikko(date) {
 
     kuukausiDiv.innerHTML = html;
 
-    // Add event listeners for expanding/collapsing events
+    // Lisää tapahtumien kuuntelijat tapahtumien laajentamista/kokoamista varten
     kuukausiDiv.querySelectorAll('.viikko-paiva-solu[data-date]').forEach(cell => {
-        // Parse tapahtumat for this cell
+        // Jäsennä tapahtumat tälle solulle
         let tapahtumat = [];
         try {
             tapahtumat = JSON.parse(cell.getAttribute('data-tapahtumat') || '[]');
         } catch (e) {}
 
-        // Only open the event creation modal if the cell itself (not an event) is clicked
+        // Avaa tapahtuman luomismodal vain, jos solua itseään (ei tapahtumaa) napsautetaan.
         cell.addEventListener('click', function(e) {
             if (e.target.closest('.viikko-event')) return;
             const date = this.getAttribute('data-date');
@@ -124,13 +124,13 @@ export function renderViikko(date) {
             if (window.showtapahtumaModal) window.showtapahtumaModal();
         });
 
-        // Add event click for expanding/collapsing
+        // Lisää tapahtuma napsauttamalla laajentaaksesi/kokoaksesi
         const events = cell.querySelectorAll('.viikko-event.collapsed');
         if (events.length > 0) {
             events.forEach(evEl => {
                 evEl.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    // Collapse all events in this cell
+                    // Piilota kaikki tapahtumat tässä solussa
                     events.forEach((el, idx) => {
                         let ev = tapahtumat[idx];
                         let timeStr = '';
@@ -143,7 +143,7 @@ export function renderViikko(date) {
                         el.classList.remove('expanded');
                         el.classList.add('collapsed');
                     });
-                    // Expand this one
+                    // Laajenna tämä
                     const idx = parseInt(this.getAttribute('data-idx'), 10);
                     let ev = tapahtumat[idx];
                     let timeStr = '';
