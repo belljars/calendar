@@ -36,16 +36,6 @@ Kalenteri-sovellus, jossa voit lisätä, muokata ja poistaa tapahtumia sekä hal
 - **Tietokantarakenne ja API voivat muuttua ilman varoitusta.**
 - **Ylläpito ja kehitys on juuri aloitettu uudelleen.**
 
-## Lisenssi
-
-Tämä projekti on tarkoitettu oppimiskäyttöön.
-
----
-
-**Yhteydenotot ja palautteet:**  
-Katso [frontend/index.html](frontend/index.html) ja [backend/api.py](backend/api.py) koodista.2. **Frontend**  
-   - Avaa `frontend/index.html` selaimessa
-
 ## Tärkeää
 
 - **Projektia ei ole testattu kattavasti. Monet ominaisuudet voivat olla rikki.**
