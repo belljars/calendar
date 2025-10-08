@@ -1,4 +1,4 @@
-Collecting workspace information# Kalenteri
+# Calendar / Kalenteri
 
 **⚠️ VAROITUS: Tämä projekti on keskeneräinen ja osittain rikki. Ylläpito ja kehitys on juuri aloitettu uudelleen, joten monet ominaisuudet eivät välttämättä toimi oikein. Käytä omalla vastuulla!**
 
@@ -51,12 +51,3 @@ Katso [frontend/index.html](frontend/index.html) ja [backend/api.py](backend/api
 - **Projektia ei ole testattu kattavasti. Monet ominaisuudet voivat olla rikki.**
 - **Tietokantarakenne ja API voivat muuttua ilman varoitusta.**
 - **Ylläpito ja kehitys on juuri aloitettu uudelleen.**
-
-## Lisenssi
-
-Tämä projekti on tarkoitettu oppimiskäyttöön.
-
----
-
-**Yhteydenotot ja palautteet:**  
-Katso [frontend/index.html](frontend/index.html) ja [backend/api.py](backend/api.py) koodista.
